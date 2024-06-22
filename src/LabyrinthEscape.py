@@ -23,7 +23,8 @@ class LabyrinthEscape:
 
         self._worldObjects = {
             WorldObjectsTypes.PLAYER.name: None,
-            WorldObjectsTypes.DRAWABLES.name: []
+            WorldObjectsTypes.DRAWABLES.name: [],
+            WorldObjectsTypes.KEY_LISTENERS.name: []
         }
 
         self._stages = {
@@ -57,7 +58,8 @@ class LabyrinthEscape:
         self._dispatchPressedKeyEvent(pressedKeys)
 
     def _dispatchPressedKeyEvent(self, pressedKeys):
-        pass
+        for keyListener in self._worldObjects[WorldObjectsTypes.KEY_LISTENERS.name]:
+            keyListener.onKeyPressed(pressedKeys)
 
     def _loadStage(self, stageName):
         self._stages[stageName].loadStage(self._worldObjects)
